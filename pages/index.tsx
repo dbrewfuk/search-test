@@ -16,8 +16,6 @@ async function fetcher(url: string) {
 }
 
 export default function HomePage() {
-  const { data: tests, error } = useSWR("/api/getTests", fetcher);
-
   return (
     <div>
       <h1>Prisma Test</h1>
