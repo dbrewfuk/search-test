@@ -14,7 +14,7 @@ export default async function handler(
   try {
     const tests = await prisma.test.findMany();
     res.status(200).json(tests);
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error fetching tests:", error);
     res
       .status(500)
