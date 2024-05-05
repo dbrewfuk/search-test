@@ -33,6 +33,7 @@ export default function HomePage() {
           </li>
         ))}
       </ul>
+      <AddTest />
     </div>
   );
 }
