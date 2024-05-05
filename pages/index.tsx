@@ -22,7 +22,14 @@ export default function HomePage() {
     return (
       <div>
         <h1>Prisma Test</h1>
-
+        <ul>
+          {tests.map((test: Test) => (
+            <li key={test.id}>
+              <h2>{test.name}</h2>
+              <p>{test.email}</p>
+            </li>
+          ))}
+        </ul>
         <div>Failed to load tests</div>
       </div>
     );
