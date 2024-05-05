@@ -16,7 +16,7 @@ async function fetcher(url: string) {
 }
 
 export default function HomePage() {
-  const { data: tests, error } = useSWR("/api/getTests", fetcher);
+  const { data: tests } = useSWR("/api/getTests", fetcher);
 
   return (
     <div>
