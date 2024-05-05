@@ -1,18 +1,21 @@
-// Inside /pages/api/addTest.ts 
+// Inside /pages/api/addTest.ts
 import { PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handle(req: NextApiRequest, res: NextApiResponse) {
+export default async function handle(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   const prisma = new PrismaClient();
-  
-  const { name, email }  = req.body;
-  
+
+  const { name, email } = req.body;
+
   try {
     const createdTest = await prisma.test.create({
       data: {
         name: name,
         email: email,
-      }
+      },
     });
 
     res.status(200).json(createdTest);
@@ -21,6 +24,6 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
   } finally {
     async () => {
       await prisma.$disconnect();
-    }
+    };
   }
 }

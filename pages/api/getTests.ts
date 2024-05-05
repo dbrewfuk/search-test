@@ -1,9 +1,13 @@
 // Inside /pages/api/getTests.ts
+import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 
-export default async function handler(req, res) {
-  if (req.method !== 'GET') {
-    return res.status(405).json({ message: 'Method not allowed' });
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  if (req.method !== "GET") {
+    return res.status(405).json({ message: "Method not allowed" });
   }
 
   const prisma = new PrismaClient();
@@ -12,7 +16,7 @@ export default async function handler(req, res) {
     const tests = await prisma.test.findMany();
     res.status(200).json(tests);
   } catch (error) {
-    res.status(500).json({ error: 'Unable to fetch tests' });
+    res.status(500).json({ error: "Unable to fetch tests" });
   } finally {
     await prisma.$disconnect();
   }
