@@ -1,6 +1,5 @@
 // inside /pages/index.tsx
 import useSWR from "swr";
-import AddTest from "./addTest";
 
 interface Test {
   id: string;
@@ -33,7 +32,6 @@ export default function HomePage() {
           </li>
         ))}
       </ul>
-      <AddTest />
     </div>
   );
 }
