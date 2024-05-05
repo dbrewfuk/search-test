@@ -1,26 +1,25 @@
-// Inside /pages/api/getTests.ts
+// pages/api/getData.ts
 import { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
+import axios from "axios";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  if (req.method !== "GET") {
-    return res.status(405).json({ message: "Method not allowed" });
-  }
-
-  const prisma = new PrismaClient();
-
+  console.log("Received request:", req.url);
   try {
-    const tests = await prisma.test.findMany();
-    res.status(200).json(tests);
-  } catch (error: any) {
-    console.error("Error fetching tests:", error);
-    res
-      .status(500)
-      .json({ error: "Unable to fetch tests", details: error.message });
-  } finally {
-    await prisma.$disconnect();
+    // Fetch the external JSON file
+    const response = await axios.get(
+      "https://demo.kctcs.edu/untitled/data.json",
+    );
+
+    // Extract the data from the response
+    const jsonData = response.data;
+
+    // Send the JSON data as the response
+    res.status(200).json(jsonData);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).json({ error: "Unable to fetch data" });
   }
 }
